@@ -5,7 +5,7 @@
           <router-link to="/about">About</router-link>
           <router-link to="/contact">Contact</router-link>
           <router-link to="/products">Products</router-link>
-          <router-link v-if="isLoggedIn" to="/productsCreate">Create Products</router-link>
+          <router-link v-if="isLoggedIn" to="/products/create">Create Products</router-link>
       </nav>
       <nav class="navbar">
         <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
@@ -16,15 +16,16 @@
 </template>
   
 <script>
+import axios from 'axios';
+import { BASE_URL, TOKEN } from '@/apiConfig'; // Import the base URL and token
+
 export default {
-  name: 'Header',
-  computed: {
+    // ...
+    computed: {
         isLoggedIn() {
-            // Replace this with your own logic to check if the user is logged in
-            // For example, you can check if a user token exists in your Vuex store or in localStorage
-            return false;
+            return !!TOKEN; // Return true if the token is set and false otherwise
         }
-    }
+    },
 }
 </script>
 

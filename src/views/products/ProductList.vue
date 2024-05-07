@@ -39,13 +39,12 @@
 
 <script>
 import axios from 'axios';
-import { BASE_URL } from '@/apiConfig';
+import { BASE_URL, TOKEN } from '@/apiConfig';
 
 export default {
     data() {
         return {
             products: [],
-            isLoggedIn: false, // Replace this with your own logic to check if the user is logged in
             rowsPerPage: '10',
             currentPage: 1
         };
@@ -58,6 +57,9 @@ export default {
         },
         totalPages() {
             return Math.ceil(this.products.length / this.rowsPerPage);
+        },
+        isLoggedIn() {
+            return !!TOKEN;
         }
     },
     async mounted() {

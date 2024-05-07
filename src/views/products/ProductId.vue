@@ -20,14 +20,18 @@
 
 <script>
 import axios from 'axios';
-import { BASE_URL } from '@/apiConfig';
+import { BASE_URL, TOKEN } from '@/apiConfig';
 
 export default {
     data() {
         return {
             product: {},
-            isLoggedIn: true // Replace this with your own logic to check if the user is logged in
         };
+    },
+    computed: {
+        isLoggedIn() {
+            return !!TOKEN;
+        }
     },
     async mounted() {
         try {
@@ -49,9 +53,9 @@ export default {
         },
         async deleteProduct(id) {
             try {
-                await axios.delete(`http://localhost:8888/api/v1/products/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/products/${id}`, {
                     headers: {
-                        Authorization: `Bearer ${token}` // Replace this with the actual token
+                        Authorization: `Bearer ${token}`
                     }
                 });
 

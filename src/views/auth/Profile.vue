@@ -10,6 +10,7 @@
 
 <script>
 import axios from 'axios';
+import { BASE_URL, TOKEN } from '@/apiConfig';
 
 export default {
     data() {
@@ -19,7 +20,7 @@ export default {
     },
     async created() {
         try {
-            const response = await axios.get(`http://localhost:8888/api/v1/users/${userId}`, {
+            const response = await axios.get(`${BASE_URL}/api/v1/users/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

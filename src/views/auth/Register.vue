@@ -21,6 +21,7 @@
 
 <script>
 import axios from 'axios';
+import { BASE_URL, TOKEN } from '@/apiConfig';
 
 export default {
     data() {
@@ -36,7 +37,7 @@ export default {
             event.preventDefault();
 
             try {
-                const response = await axios.post('http://localhost:8888/api/v1/register', {
+                const response = await axios.post(`${BASE_URL}api/v1/register`, {
                     name: this.name,
                     email: this.email,
                     password: this.password,

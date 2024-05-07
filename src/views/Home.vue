@@ -8,7 +8,6 @@
 <script>
 export default {
     name: 'Home',
-    // Ajoutez ici vos méthodes, computed properties, etc.
 }
 </script>
 
