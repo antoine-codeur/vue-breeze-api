@@ -11,13 +11,14 @@
         <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
         <router-link v-if="!isLoggedIn" to="/register">Register</router-link>
         <router-link v-else to="/profile">Profile</router-link>
+        <a v-if="isLoggedIn" href="#" @click="logout">Logout</a>
     </nav>
   </header>
 </template>
   
 <script>
 import axios from 'axios';
-import { BASE_URL, TOKEN } from '@/apiConfig'; // Import the base URL and token
+import { BASE_URL, TOKEN, setToken } from '@/apiConfig'; // Import the base URL and token
 
 export default {
     // ...
@@ -26,6 +27,14 @@ export default {
             return !!TOKEN; // Return true if the token is set and false otherwise
         }
     },
+    methods: {
+        logout() {
+            // Clear the token from local storage and TOKEN
+            localStorage.removeItem('token');
+            setToken(``);
+            window.location.reload();
+        }
+    }
 }
 </script>
 
