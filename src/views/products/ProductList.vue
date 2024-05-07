@@ -1,40 +1,38 @@
 <template>
-    <div>
-        <h1>Product List</h1>
-        <label for="rowsPerPage">Rows per page:</label>
-        <select id="rowsPerPage" v-model="rowsPerPage">
-            <option value="10">10</option>
-            <option value="30">30</option>
-            <option value="50">50</option>
-        </select>
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th v-if="isLoggedIn">Stock</th>
-                    <th v-if="isLoggedIn">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="product in paginatedProducts" :key="product.id" @click="viewProduct(product.id)" class="clickable-row">
-                    <td><img v-if="product.image" :src="product.image" alt="Product Image"></td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.price }}</td>
-                    <td v-if="isLoggedIn">{{ product.stock }}</td>
-                    <td v-if="isLoggedIn" class="no-hover">
-                        <button @click.stop="editProduct(product.id)">Edit</button>
-                        <button @click.stop="deleteProduct(product.id)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-        <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-    </div>
+    <h1>Product List</h1>
+    <label for="rowsPerPage">Rows per page:</label>
+    <select id="rowsPerPage" v-model="rowsPerPage">
+        <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+    </select>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th v-if="isLoggedIn">Stock</th>
+                <th v-if="isLoggedIn">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="product in paginatedProducts" :key="product.id" @click="viewProduct(product.id)" class="clickable-row">
+                <td><img v-if="product.image" :src="product.image" alt="Product Image"></td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td v-if="isLoggedIn">{{ product.stock }}</td>
+                <td v-if="isLoggedIn" class="no-hover">
+                    <button @click.stop="editProduct(product.id)">Edit</button>
+                    <button @click.stop="deleteProduct(product.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+    <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
 </template>
 
 <script>
@@ -69,6 +67,11 @@ export default {
             this.products = response.data;
         } catch (error) {
             console.error('Error:', error);
+        }
+    },
+    watch: {
+        rowsPerPage() {
+            this.currentPage = 1;
         }
     },
     methods: {

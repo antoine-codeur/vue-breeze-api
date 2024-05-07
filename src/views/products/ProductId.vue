@@ -1,10 +1,12 @@
 <template>
+    <h1>Product - {{ product.name }}</h1>
+    <span>id:{{ product.id }}</span>
     <div class="product-page">
         <div class="product-image">
             <img v-if="product.image" :src="product.image" alt="Product Image">
         </div>
         <div class="product-info">
-            <h1>{{ product.name }}</h1>
+            <h2>{{ product.name }}</h2>
             <p>{{ product.description }}</p>
             <p>Stock: {{ product.stock }}</p>
             <p>Price: {{ product.price }}</p>

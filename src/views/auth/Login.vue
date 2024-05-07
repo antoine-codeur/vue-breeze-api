@@ -38,13 +38,15 @@ export default {
                 this.$store.commit('setToken', response.data.token);
                 setToken(response.data.token); // Call setToken with the received token
 
-                // Store the token in local storage
+                // Store the user ID and the token in local storage
+                localStorage.setItem('userId', response.data.user.id);
                 localStorage.setItem('token', response.data.token);
-                
+
+                // Redirect to home page and refresh
                 window.location.href = '/';
             } catch (error) {
+                console.error('Error:', error);
             }
-            reload();
         }
     }
 };

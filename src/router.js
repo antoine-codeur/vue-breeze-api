@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { TOKEN } from './apiConfig';
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Contact from './views/Contact.vue'
@@ -29,7 +30,14 @@ const routes = [
   {
     path: '/products/create',
     name: 'product-create',
-    component: ProductCreate
+    component: ProductCreate,
+    beforeEnter: (to, from, next) => {
+        if (!TOKEN) {
+            next('/login');
+        } else {
+            next();
+        }
+    }
   },
   {
     path: '/products',
@@ -39,7 +47,14 @@ const routes = [
   {
     path: '/products/edit/:id',
     name: 'product-edit',
-    component: ProductEdit
+    component: ProductEdit,
+    beforeEnter: (to, from, next) => {
+        if (!TOKEN) {
+            next('/login');
+        } else {
+            next();
+        }
+    }
   },
   {
     path: '/products/:id',
@@ -49,17 +64,38 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+        if (TOKEN) {
+            next('/');
+        } else {
+            next();
+        }
+    }
   },
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    beforeEnter: (to, from, next) => {
+        if (TOKEN) {
+            next('/');
+        } else {
+            next();
+        }
+    }
   },
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+        if (!TOKEN) {
+            next('/login');
+        } else {
+            next();
+        }
+    }
   }
 ]
 
