@@ -85,7 +85,7 @@ export default {
             try {
                 await axios.delete(`http://localhost:8888/api/v1/products/${id}`, {
                     headers: {
-                        Authorization: `Bearer ${token}` // Replace this with the actual token
+                        Authorization: TOKEN
                     }
                 });
 

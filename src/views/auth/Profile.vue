@@ -2,14 +2,17 @@
     <h1>Profile</h1>
     <div class="profile-page">
         <div class="profile-image">
-            <img v-if="user.profile_photo_url" :src="user.profile_photo_url" alt="Profile Photo">
+            <img v-if="user.image" :src="user.image" alt="Profile Photo">
+            <img v-else :src="user.profile_photo_url" alt="Profile Photo">
         </div>
         <div class="profile-info">
             <h2>{{ user.name }}</h2>
             <p>Email: {{ user.email }}</p>
             <p>Role: {{ user.role }}</p>
+            <p>Id: {{ user.id }}</p>
         </div>
     </div>
+    <p>TOKEN: {{ TOKEN }}</p>
 </template>
 
 <script>
@@ -21,6 +24,14 @@ export default {
         return {
             user: {}
         };
+    },
+    computed: {
+        // token() {
+        //     return this.$store.state.token; // Access the token from the Vuex store
+        // },
+        TOKEN() { // Add a computed property for TOKEN
+            return TOKEN;
+        }
     },
     async created() {
         try {
